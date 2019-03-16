@@ -13,7 +13,7 @@ class PostController < ApplicationController
     render json: @post.slice(:id, :title, :content).merge(images: @post.images.map{|image|
       {id: image.id, image: image.image.blob.signed_id, filename: image.image.blob.filename, url:url_for(image.image), preview:url_for(image.image.variant(resize: "100x100"))}
     }, attachments: @post.attachments.map{|attachment|
-    {id: attachment.id, file: attachment.file.blob.signed_id, filename: attachment.file.blob.filename, url:url_for(attachment.file), preview: attachment.file.representable? ? attachment.file.representation(resize: "100x100") : nil}
+      {id: attachment.id, file: attachment.file.blob.signed_id, filename: attachment.file.blob.filename, url:url_for(attachment.file), preview: attachment.file.representable? ? url_for(attachment.file.representation(resize: "100x100")) : nil}
   })
   end
 

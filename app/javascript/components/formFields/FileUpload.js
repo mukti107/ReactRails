@@ -12,14 +12,23 @@ class FileUpload extends React.Component{
     const uploader = new DirectUpload(file, uploadUrl, this);
     this.setState({uploading:true, progress: 0})
     uploader.create((err, blob)=>{
-      this.setState({uploading:false})
-      if(blob && !err){
-        fields.push({
-          [valueKey]: blob.signed_id,
-          filename: blob.filename,
-          url: `/rails/active_storage/blobs/${blob.signed_id}/${blob.filename}`
-        });
+      if(err){
+        this.setState({uploading:false});
+        return;
       }
+      const {id, signed_id, filename} = blob;
+      fetch('/api/blob/'+id)
+      .then(resp=>resp.json())
+      .then(({url, preview})=>{
+        fields.push({
+          [valueKey]: signed_id,
+          filename,
+          url,
+          preview,
+        });
+        this.setState({uploading:false})
+      })
+      
     })
   }
 
