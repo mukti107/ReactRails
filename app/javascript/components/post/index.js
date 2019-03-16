@@ -14,12 +14,14 @@ class Index extends React.Component {
     return (
       <div>
         <h1>Posts</h1>
-        <ul>
-          {records.map(post=><li>{post.title} (
-            <Link to={`/posts/${post.id}/edit`}>Edit</Link> |
-             <Link to={`/posts/${post.id}`}>Read</Link> | 
-             <a href="javascipt:void;" onClick={()=>this.props.deletePost(post.id)}>Delete</a> 
-             )</li>)}
+        <ul className="list-group">
+          {records.map(post=><li className="list-group-item">{post.title} 
+            <div className="pull-right">
+              <Link className="btn btn-link" to={`/posts/${post.id}`}>View</Link> 
+              <Link className="btn btn-link" to={`/posts/${post.id}/edit`}>Edit</Link> 
+              <button className="btn btn-link" type="button" onClick={()=>this.props.deletePost(post.id)}>Delete</button> 
+             </div>
+             </li>)}
         </ul>
       </div>
     );

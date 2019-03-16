@@ -6,8 +6,8 @@ class Header extends React.Component {
     return (
       <div>
         <ul className="nav nav-pills">
-          <li role="presentation"><Link to="/posts">List Posts</Link></li>
-          <li role="presentation"><Link to="/posts/add">Add New Post</Link></li>
+          <li role="presentation"><Link to="/posts">Posts</Link></li>
+          <li role="presentation"><Link to="/posts/add">+ Add New Post</Link></li>
         </ul>
       </div>
     );
